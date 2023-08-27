@@ -1,0 +1,243 @@
+@import 'variables';
+
+.flex-between {
+    @include flex;
+}
+.flex {
+    display: flex;
+}
+.center {
+    @include flex(center, center);
+}
+.flex-top {
+    display: flex;
+    align-items: flex-start !important;
+}
+.flex-bottom {
+    display: flex;
+    align-items: flex-end !important;
+}
+.float-r {
+    float: right;
+}
+
+.text-right {
+    text-align: right !important;
+}
+.text-center {
+    text-align: center !important;
+}
+.text-left {
+    text-align: left !important;
+}
+
+@for $i from 0 to 101 {
+    .w-#{$i} {
+        width: ($i * 1%) !important;
+    }
+    .h-#{$i} {
+        height: ($i + 0px) !important;
+    }
+    .mr-#{$i} {
+        margin-right: ($i + 0px) !important;
+    }
+    .mt-#{$i} {
+        margin-top: ($i + 0px) !important;
+    }
+    .ml-#{$i} {
+        margin-left: ($i + 0px) !important;
+    }
+    .mb-#{$i} {
+        margin-bottom: ($i + 0px) !important;
+    }
+    .pr-#{$i} {
+        padding-right: ($i + 0px) !important;
+    }
+    .pt-#{$i} {
+        padding-top: ($i + 0px) !important;
+    }
+    .pl-#{$i} {
+        padding-left: ($i + 0px) !important;
+    }
+    .pb-#{$i} {
+        padding-bottom: ($i + 0px) !important;
+    }
+    .fs-#{$i} {
+        font-size: ($i + 0px) !important;
+    }
+}
+
+.c-black{
+    color: $black !important;
+}
+.c-red {
+    color: $red !important;
+}
+.c-teal {
+    color: $teal;
+}
+.c-blue {
+    color: $blue;
+}
+.c-gray{
+    color: $gray;
+}
+.fw-600 {
+    font-weight: 600;
+}
+.fw-900 {
+    font-weight: 900 !important;
+}
+.w-n {
+    width: 80px;
+}
+
+
+body{
+    font-family: 'pretendard';
+    color: $white;
+}
+
+html{
+    font-size: 16px;
+    overflow: hidden;
+    overscroll-behavior: contain;
+
+    @include tablet(){
+        font-size: 12px;
+    }
+
+    @include mobile(){
+        font-size: 10px;
+    }
+}
+
+
+.button-container {
+    display: flex;
+    gap: rem(20);
+    > button {
+      width: rem(150);
+      position: relative;
+      background: inherit;
+      padding: rem(5);
+      &:after,
+      &:before {
+        content: "";
+        position: absolute;
+        width: 10%;
+        height: 25%;
+        transition: 0.4s;
+      }
+      &:after {
+        right: 0;
+        bottom: 0;
+        border-right: 1px solid $black;
+        border-bottom: 1px solid $black;
+      }
+      &:before {
+        top: 0;
+        left: 0;
+        border-left: 1px solid $black;
+        border-top: 1px solid $black;
+      }
+      &:hover {
+        &:after,
+        &:before {
+          width: 100%;
+          height: 100%;
+        }
+        color: $orange;
+      }
+      span {
+        display: inline-block;
+        width: 100%;
+        padding: rem(10);
+        background: $black;
+        font-size: rem(14);
+        font-weight: 700;
+        letter-spacing: 2px;
+      }
+    }
+  }
+
+  .use-skill{
+    display: flex;
+    margin-bottom: rem(10);
+    font-size: rem(16);
+    gap: rem(10);
+    >li{
+        padding: rem(2) rem(10);
+        border-radius: 20px;
+        &.vue{
+            background: #41b8b3;
+            &:before{
+                display: inline;
+                content: "Vue3";
+            }
+        }
+        &.html{
+            background: #f35825;
+            &:before{
+                display: inline;
+                content: "HTML5";
+            }
+        }
+        &.css{
+            background: #1c76b8;
+            &:before{
+                display: inline;
+                content: "Css3";
+            }
+        }
+        &.js{
+            background: #f78224;
+            &:before{
+                display: inline;
+                content: "JavaScript";
+            }
+        }
+        &.scss{
+            background: #d1699d;
+            &:before{
+                display: inline;
+                content: "Scss";
+            }
+        }
+        &.node{
+            background: #8fc708;
+            &:before{
+                display: inline;
+                content: "node.js";
+            }
+        }
+         &.jquery{
+            background: #106dae;
+            &:before{
+                display: inline;
+                content: "jQuery";
+            }
+        }
+        &.aws{
+            background: #ff9c08;
+            &:before{
+                display: inline;
+                content: "AWS";
+            }
+        }
+        &.mongo{
+            background: #199555;
+            &:before{
+                display: inline;
+                content: "mongoDB";
+            }
+        }
+        &.boot{
+            background: #761dde;
+            &:before{
+                display: inline;
+                content: "BootStrap";
+            }
+        }
+    }
+  }
