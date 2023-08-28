@@ -13,7 +13,7 @@
       </div>
       <div class="profile-text">
         <h1>
-          MIN JEONGKI
+          MIN <br class="db-m" />JEONGKI
           <p>FRONTEND DEVELOPER</p>
         </h1>
         <ul class="tab">
@@ -180,6 +180,12 @@ section {
   align-items: center;
   width: 80%;
   height: 70%;
+  @include mobile() {
+    top: 45%;
+    .profile-text {
+      width: 100%;
+    }
+  }
 }
 .profile-img {
   width: 40%;
@@ -216,6 +222,13 @@ section {
       border-right: 2px solid #777;
       animation: cursor 0.9s infinite steps(2);
     }
+  }
+  @include mobile() {
+    position: absolute;
+    top: 0%;
+    right: 20%;
+    width: auto;
+    height: auto;
   }
 }
 .profile-text {
@@ -289,6 +302,18 @@ section {
       }
     }
   }
+  @include mobile() {
+    h1 {
+      font-size: rem(60);
+    }
+    .text-box {
+      > li {
+        font-size: rem(18);
+        letter-spacing: 0;
+        line-height: 1.4;
+      }
+    }
+  }
 }
 .skills {
   > li {
@@ -314,6 +339,9 @@ section {
       padding-right: 20px;
       line-height: 30px;
       font-family: "PinyonScript";
+      b {
+        position: relative;
+      }
       span {
         position: absolute;
         left: 0;

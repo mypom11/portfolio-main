@@ -30,9 +30,9 @@
               class="img-wrap"
               :style="{ backgroundImage: `url(${project.img})` }"
             >
+              <!-- <span></span>
               <span></span>
-              <span></span>
-              <span></span>
+              <span></span> -->
             </div>
             <div class="text-wrap">
               <span>{{ project.company }}</span>
@@ -67,7 +67,7 @@
           </div>
         </InterctionObserver>
       </ul>
-      <div class="progress-bar">
+      <div class="progress-bar dn-m">
         <span
           :style="{
             width: `${(scroll / (this.projects.length - 1)) * 2}%`,
@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import InterctionObserver from "./InterctionObserver.vue";
 
 export default {
@@ -215,14 +216,16 @@ export default {
   },
   methods: {
     scrollEvent(e) {
-      e.preventDefault();
-      if (e.deltaY > 0) {
-        if (this.scroll < 50 * (this.projects.length - 1)) {
-          this.scroll++;
-        }
-      } else {
-        if (this.scroll > 0) {
-          this.scroll--;
+      if (!this.isMobile) {
+        e.preventDefault();
+        if (e.deltaY > 0) {
+          if (this.scroll < 50 * (this.projects.length - 1)) {
+            this.scroll++;
+          }
+        } else {
+          if (this.scroll > 0) {
+            this.scroll--;
+          }
         }
       }
     },
@@ -241,20 +244,22 @@ export default {
       }
     },
     drag(event) {
-      if (this.mouseDrag) {
-        let delta;
-        if (event.clientX === undefined) {
-          delta = event.changedTouches[0].clientX - this.initialMousePos;
-        } else {
-          delta = event.clientX - this.initialMousePos;
-        }
-        if (delta < 0) {
-          if (this.scroll < 50 * (this.projects.length - 1)) {
-            this.scroll++;
+      if (!this.isMobile) {
+        if (this.mouseDrag) {
+          let delta;
+          if (event.clientX === undefined) {
+            delta = event.changedTouches[0].clientX - this.initialMousePos;
+          } else {
+            delta = event.clientX - this.initialMousePos;
           }
-        } else {
-          if (this.scroll > 0) {
-            this.scroll--;
+          if (delta < 0) {
+            if (this.scroll < 50 * (this.projects.length - 1)) {
+              this.scroll++;
+            }
+          } else {
+            if (this.scroll > 0) {
+              this.scroll--;
+            }
           }
         }
       }
@@ -263,6 +268,9 @@ export default {
       this.mouseDrag = false;
       this.initialMousePos = null;
     },
+  },
+  computed: {
+    ...mapState(["isMobile"]),
   },
   components: { InterctionObserver },
 };
@@ -284,6 +292,10 @@ section {
   overflow: hidden;
   width: 100vw;
   cursor: grab;
+  @include mobile() {
+    overflow-y: scroll;
+    cursor: default;
+  }
 }
 .slide {
   position: absolute;
@@ -294,6 +306,7 @@ section {
   width: 600vw;
   height: 100vh;
   will-change: left;
+
   > li {
     position: relative;
     height: 100%;
@@ -376,6 +389,7 @@ section {
       background-position: center center;
       background-repeat: no-repeat;
       background-size: contain;
+      //   filter: blur(5px);
       &:after {
         content: "";
         position: absolute;
@@ -383,23 +397,23 @@ section {
         top: 0;
         width: 100%;
         height: 100%;
-        background: rgba($color: $black, $alpha: 0.6);
+        background: rgba($color: #1a1a3a, $alpha: 0.5);
       }
-      span {
-        display: block;
-        width: 100%;
-        height: 34%;
-        background: $black;
-        &:nth-child(2n) {
-          position: relative;
-          right: 0;
-        }
-        @for $i from 0 to 4 {
-          &:nth-child(#{$i}) {
-            transition: #{$i * 0.1}s 0.2s ease-in;
-          }
-        }
-      }
+      //   span {
+      //     display: block;
+      //     width: 100%;
+      //     height: 34%;
+      //     background: $black;
+      //     &:nth-child(2n) {
+      //       position: relative;
+      //       right: 0;
+      //     }
+      //     @for $i from 0 to 4 {
+      //       &:nth-child(#{$i}) {
+      //         transition: #{$i * 0.1}s 0.2s ease-in;
+      //       }
+      //     }
+      //   }
     }
     &.active {
       .img-wrap {
@@ -431,6 +445,52 @@ section {
         }
         .button-container {
           opacity: 1;
+        }
+      }
+    }
+  }
+  @include mobile() {
+    display: block;
+    width: 100% !important;
+    height: auto;
+    top: 0;
+    left: 0 !important;
+    transform: none;
+    padding-top: 10vh;
+    > li {
+      height: 50vh;
+      width: 100%;
+      padding: 0 2vw;
+      &:nth-child(2n) {
+        padding: 0 2vw;
+      }
+      .slide-inner {
+        padding: 0;
+      }
+      .img-wrap {
+        width: 100%;
+        height: 100%;
+      }
+      .text-wrap {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        text-align: center;
+        padding: rem(30) 0;
+        background: rgba($color: #1a1a3a, $alpha: 0.8);
+        > span {
+          left: 5%;
+        }
+        .desc {
+          padding: 0 rem(20);
+          width: 100%;
+        }
+        .use-skill {
+          justify-content: center;
+        }
+        .button-container {
+          justify-content: center;
         }
       }
     }

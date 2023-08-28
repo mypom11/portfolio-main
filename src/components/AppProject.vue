@@ -18,7 +18,7 @@
         }"
       >
         <IntersectionObserver
-          v-for="(project, i) in projects.slice().reverse()"
+          v-for="(project, i) in projects"
           :key="i"
           :style="{
             transform: transform(i),
@@ -30,28 +30,27 @@
         </IntersectionObserver>
       </ul>
     </div>
-
     <div class="project-desc">
-      <h1>{{ projects.slice().reverse()[observer].name }}</h1>
+      <h1>{{ projects[observer].name }}</h1>
       <ul class="use-skill">
         <li
-          v-for="skill in projects.slice().reverse()[observer].skill"
+          v-for="skill in projects[observer].skill"
           :key="skill"
           :class="skill"
         ></li>
       </ul>
-      <p v-html="projects.slice().reverse()[observer].desc"></p>
+      <p v-html="projects[observer].desc"></p>
       <div class="button-container">
         <button
-          v-if="projects.slice().reverse()[observer].learn !== null"
-          @click="location(projects.slice().reverse()[observer].learn)"
+          v-if="projects[observer].learn !== null"
+          @click="location(projects[observer].learn)"
         >
           <span>Learn More</span>
         </button>
-        <button @click="location(projects.slice().reverse()[observer].git)">
+        <button @click="location(projects[observer].git)">
           <span>GitHub</span>
         </button>
-        <button @click="location(projects.slice().reverse()[observer].demo)">
+        <button @click="location(projects[observer].demo)">
           <span>Demo</span>
         </button>
       </div>
@@ -70,44 +69,40 @@ export default {
     return {
       projects: [
         {
-          name: "이상형 월드컵 사이트",
-          skill: ["html", "css", "scss", "js", "vue", "aws", "node", "mongo"],
-          desc: "- mongoDB와 node를 활용하여 DB와 서버를 구현<br/>- 게임을 등록하고 조회 가능한 UI구현<br/>- 비 로그인 방식으로 게임을 진행, 댓글 기능 구현<br/>- 게임목록의 정렬 및 검색 기능 구현<br/> - intractiveObserver를 활용한 스크롤 애니메이션 구현",
-          git: "https://github.com/mypom11/IdealWorldCup",
-          learn: null,
-          demo: "http://13.124.59.247",
-          img: require("@/assets/images/project/project1-1.png"),
-          num: 0,
-        },
-        {
-          name: "영화 및 OTT 검색 사이트",
-          skill: ["html", "css", "scss", "js", "vue", "aws", "node"],
-          desc: "- TMDB Api를 이용해 영화와 TV시리즈의 정보를 보여줌<br/>- 애플의 홈페이지와 비슷한 느낌의 스크롤 이벤트 구현<br/>- 영화, TV시리즈 검색 기능 구현<br/>- 예전 Ipod의 CoverFlow 느낌의 컴포넌트 구현<br/>- node를 이용한 기본적인 서버 구현",
-          git: "https://github.com/mypom11/movie-web",
-          learn: null,
-          demo: "http://54.180.43.106",
-          img: require("@/assets/images/project/project2-1.png"),
-          num: 1,
-        },
-        {
-          name: "전기차 충전소 검색 사이트",
-          skill: ["html", "css", "scss", "js", "vue", "aws", "node"],
-          desc: "- 공공데이터를 사용하여 행정 구역 별 충전소 상태 및 위치를 확인하는 웹<br/>- 카카오 맵 api를 연동하여 선택된 충전소 위치를 지도에 표시하는 기능<br/>- 검색기능으로 충전소 검색 가능<br/>- 충전소 상세 정보 확인 및 지도 상 위치로 이동 - AWS서버를 활용하여 서버 구현",
-          git: "https://github.com/mypom11/ev-charger",
-          learn: "https://www.notion.so/ce7c4e91d433448fb03a67ba2624e6c0",
-          demo: "http://13.209.206.3",
-          img: require("@/assets/images/project/project3-1.png"),
-          num: 2,
-        },
-        {
           name: "기존 포트폴리오",
           skill: ["html", "css", "scss", "js", "jquery"],
-          desc: "- 반응형 웹 구현<br/>- jQurey를 활용하여 원페이지 스크롤 페이지 제작<br/>- 가로스크롤 이벤트 작성<br/>- mac Finder 모양의 GUI 작성<br/>- 신입 시절 만들었던 프로젝트들 포함",
+          desc: "반응형 웹 구현<br/>jQurey를 활용하여 원페이지 스크롤 페이지 제작<br/>가로스크롤 이벤트 작성<br/>mac Finder 모양의 GUI 작성<br/>신입 시절 만들었던 프로젝트들 포함",
           git: "https://github.com/mypom11/new-portfolio",
           learn: null,
           demo: "https://mypom11.github.io/new-portfolio/",
           img: require("@/assets/images/project/project4-1.png"),
-          num: 3,
+        },
+        {
+          name: "전기차 충전소 검색 사이트",
+          skill: ["html", "css", "scss", "js", "vue", "aws", "node"],
+          desc: "공공데이터를 사용하여 행정 구역 별 충전소 상태 및 위치를 확인<br/>충전소 위치를 지도에 표시하는 기능<br/>검색기능으로 충전소 검색 가능<br/>충전소 상세 정보 확인 및 지도 상 위치로 이동<br/>AWS서버를 활용하여 서버 구현",
+          git: "https://github.com/mypom11/ev-charger",
+          learn: "https://www.notion.so/ce7c4e91d433448fb03a67ba2624e6c0",
+          demo: "http://13.209.206.3",
+          img: require("@/assets/images/project/project3-1.png"),
+        },
+        {
+          name: "영화 및 OTT 검색 사이트",
+          skill: ["html", "css", "scss", "js", "vue", "aws", "node"],
+          desc: "TMDB Api를 이용해 영화와 TV시리즈의 정보를 보여줌<br/>애플의 홈페이지와 비슷한 느낌의 스크롤 이벤트 구현<br/>영화, TV시리즈 검색 기능 구현<br/>예전 Ipod의 CoverFlow 느낌의 컴포넌트 구현<br/>node를 이용한 기본적인 서버 구현",
+          git: "https://github.com/mypom11/movie-web",
+          learn: null,
+          demo: "http://54.180.43.106",
+          img: require("@/assets/images/project/project2-1.png"),
+        },
+        {
+          name: "이상형 월드컵 사이트",
+          skill: ["html", "css", "scss", "js", "vue", "aws", "node", "mongo"],
+          desc: "mongoDB와 node를 활용하여 DB와 서버를 구현<br/>게임을 등록하고 조회 가능한 UI구현<br/>비 로그인 방식으로 게임을 진행, 댓글 기능 구현<br/>게임목록의 정렬 및 검색 기능 구현<br/>intractiveObserver를 활용한 스크롤 애니메이션 구현",
+          git: "https://github.com/mypom11/IdealWorldCup",
+          learn: null,
+          demo: "http://13.124.59.247",
+          img: require("@/assets/images/project/project1-1.png"),
         },
       ],
       observer: 0,
@@ -208,6 +203,9 @@ section {
   transform: translateY(-50%);
   color: $white;
   height: 100vh;
+  @include mobile() {
+    top: 30%;
+  }
 }
 .wheel-cards {
   position: absolute;
@@ -220,7 +218,7 @@ section {
   transform: translate(-50%, -50%) rotate(0);
   background: $gray;
   border-radius: 50%;
-  transition: 1s ease-in;
+  transition: 0.5s ease-in;
   will-change: transform;
   > li {
     position: absolute;
@@ -232,10 +230,15 @@ section {
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
+    transition: 0.5s ease-in;
     filter: blur(5px);
     &.active {
       z-index: 1;
       filter: none;
+      @include mobile() {
+        width: 80vw;
+        height: 40vh;
+      }
     }
   }
 }
@@ -250,6 +253,7 @@ section {
     font-size: rem(50);
     font-weight: 700;
     margin-bottom: rem(10);
+    word-break: keep-all;
   }
   p {
     margin-top: rem(40);
@@ -257,6 +261,22 @@ section {
     line-height: 1.5;
     font-size: rem(20);
     word-break: keep-all;
+  }
+  @include mobile() {
+    left: 50%;
+    top: 65%;
+    width: 90%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 0 5vw;
+    .use-skill {
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .button-container {
+      justify-content: center;
+    }
   }
 }
 </style>

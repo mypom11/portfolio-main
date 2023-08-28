@@ -6,6 +6,7 @@ export default createStore({
     posY: 0,
     ani: false,
     view: false,
+    isMobile: false,
   },
   getters: {},
   mutations: {
@@ -32,6 +33,9 @@ export default createStore({
       setTimeout(() => {
         state.ani = false;
       }, 600);
+    },
+    isMobile(state, payload) {
+      state.isMobile = payload;
     },
   },
   actions: {},

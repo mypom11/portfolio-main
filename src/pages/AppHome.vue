@@ -28,8 +28,13 @@ import AppProject from "@/components/AppProject.vue";
 import AppContact from "@/components/AppContact.vue";
 import AppAbout from "@/components/AppAbout.vue";
 import AppMain from "@/components/AppMain.vue";
+
 export default {
   name: "AppHome",
+  mounted() {
+    this.mobileCheck();
+    window.addEventListener("resize", this.mobileCheck);
+  },
   data() {
     return {
       section: [
@@ -67,10 +72,17 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["zoomIn"]),
+    ...mapMutations(["zoomIn", "isMobile"]),
     zoomPanel(x, y) {
       if (this.view) {
         this.zoomIn({ x, y });
+      }
+    },
+    mobileCheck() {
+      if (window.innerWidth < 768) {
+        this.isMobile(true);
+      } else {
+        this.isMobile(false);
       }
     },
   },

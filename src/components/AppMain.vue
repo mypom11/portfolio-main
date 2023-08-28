@@ -6,14 +6,18 @@
       <marquee scrollamount="30" direction="left">FRONT-END DEVELOPER</marquee>
       <marquee scrollamount="30" direction="right">FRONT-END DEVELOPER</marquee>
       <h1>
-        <span class="aniText" v-for="(spell, i) in name.split('')" :key="i">{{
-          spell
-        }}</span>
+        <span
+          class="aniText"
+          v-for="(spell, i) in name.split('')"
+          :key="i"
+          :class="{ space: spell === ' ' }"
+          >{{ spell }}</span
+        >
       </h1>
     </div>
 
     <div class="main">
-      <h1>PORTFOLIO <span></span><span></span></h1>
+      <h1><span></span>PORT<br class="db-m" />FOLIO <span></span></h1>
       <h2>Min's</h2>
     </div>
   </section>
@@ -29,7 +33,7 @@ export default {
   },
   data() {
     return {
-      name: "MINJEONGKI",
+      name: "MIN JEONG KI",
     };
   },
   methods: {
@@ -104,6 +108,16 @@ section {
       transform: translateX(0);
     }
   }
+  @include mobile() {
+    h1 {
+      font-size: rem(100);
+      span {
+        &.space {
+          display: block;
+        }
+      }
+    }
+  }
 }
 
 @keyframes letter {
@@ -148,22 +162,20 @@ section {
     letter-spacing: 0px;
     position: relative;
     padding: 10px;
-    cursor: default;
     animation: letter 2s 5s ease-in forwards;
     span {
-      content: "";
       position: absolute;
       height: 7px;
       width: 0px;
       background: $orange;
-      transition: 300ms;
+      transition: 0.3s;
       opacity: 0.3;
       left: 50%;
       animation: liner 2s 5s ease-in forwards;
-      &:nth-child(1) {
+      &:first-child {
         bottom: 0;
       }
-      &:nth-child(2) {
+      &:last-child {
         top: 0;
       }
     }
@@ -173,11 +185,15 @@ section {
     font-family: "PinyonScript", cursive;
     font-size: rem(100);
     font-weight: 100;
+    text-align: center;
     bottom: 60%;
     position: absolute;
     opacity: 0.5;
     width: 100%;
     animation: opacity 2s 5s ease-in forwards;
+    @include mobile() {
+      bottom: 80%;
+    }
   }
 }
 </style>

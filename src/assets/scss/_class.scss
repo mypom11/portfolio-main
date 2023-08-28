@@ -92,6 +92,18 @@
     width: 80px;
 }
 
+.dn-m{
+    @include mobile(){
+        display: none;
+    }
+}
+.db-m{
+    display: none;
+    @include mobile(){
+        display: block;
+    }
+}
+
 
 body{
     font-family: 'pretendard';

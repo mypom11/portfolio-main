@@ -165,7 +165,7 @@ section {
 .card {
   position: relative;
   width: 40rem;
-  height: 20rem;
+  height: 30rem;
   perspective: 150rem;
   transition: 0.5s;
   span {
@@ -201,7 +201,7 @@ section {
         color: $white;
         bottom: 10px;
         left: 20px;
-        font-size: 18px;
+        font-size: rem(18);
         transform: rotate(-45deg);
         z-index: 2;
       }
@@ -243,7 +243,7 @@ section {
     margin: 0;
     padding: 0 10px;
     background-color: rgba(white, 0.03);
-    font-size: 13px;
+    font-size: rem(13);
     > div {
       padding: 2.5px 0;
       opacity: 0.15;
